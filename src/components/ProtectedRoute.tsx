@@ -1,6 +1,7 @@
 
 import { useAuth } from '@/hooks/useAuth';
 import { Navigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -9,6 +10,10 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute = ({ children, requireAdmin = false }: ProtectedRouteProps) => {
   const { user, userProfile, loading } = useAuth();
+
+  useEffect(() => {
+    console.log('ProtectedRoute - user:', user?.email, 'profile:', userProfile, 'loading:', loading);
+  }, [user, userProfile, loading]);
 
   if (loading) {
     return (
@@ -24,10 +29,12 @@ const ProtectedRoute = ({ children, requireAdmin = false }: ProtectedRouteProps)
   }
 
   if (!user) {
+    console.log('No user, redirecting to login');
     return <Navigate to="/login" replace />;
   }
 
   if (requireAdmin && userProfile?.role !== 'admin') {
+    console.log('Admin required but user is not admin, redirecting to home');
     return <Navigate to="/" replace />;
   }
 
