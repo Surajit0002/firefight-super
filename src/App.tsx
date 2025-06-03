@@ -9,9 +9,6 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import CreateTeam from "./pages/CreateTeam";
 import JoinTournament from "./pages/JoinTournament";
-import ConfirmReview from "./pages/ConfirmReview";
-import TournamentDetails from "./pages/TournamentDetails";
-import AdminPanel from "./pages/AdminPanel";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,9 +25,9 @@ const App = () => (
           <Route path="/register" element={<Register />} />
           <Route path="/create-team" element={<CreateTeam />} />
           <Route path="/join-tournament" element={<JoinTournament />} />
-          <Route path="/confirm-review" element={<ConfirmReview />} />
-          <Route path="/tournament/:id" element={<TournamentDetails />} />
-          <Route path="/admin" element={<AdminPanel />} />
+          <Route path="/confirm-review" element={<NotFound />} />
+          <Route path="/tournament/:id" element={<NotFound />} />
+          <Route path="/admin" element={<NotFound />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
